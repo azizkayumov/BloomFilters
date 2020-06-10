@@ -9,8 +9,10 @@ Steps to follow before using:
 2. Download English words from to this [project](
 https://github.com/dwyl/english-words/blob/master/words_alpha.txt).
 3. Install murmur hash and bitstring:
+```
          pip3 install mmh3
          pip3 install bitstring
+```  
 4. Run bf.py from command line:
          python3 bf.py    
 Note that BloomFilter initialization may take some seconds.
