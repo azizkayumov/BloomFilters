@@ -1,15 +1,3 @@
-# This gist aims to test BloomFilter with k-slices
-# Assume we have a giant set of English words,
-# user enters any string to know if the string is an English word
-# It is important not to use HashMap or HashSet because of memory contraints
-#
-# Steps to follow before using:
-# 1. Download English words from this repo: https://github.com/dwyl/english-words/blob/master/words_alpha.txt
-# 2. Open command line and install murmur hash:
-#         pip3 install mmh3
-# 3. Run sbf.py from command line:
-#         python3 sbf.py
-
 from math import ceil, log2, log
 from bitstring import BitArray
 import mmh3 # murmur hash
