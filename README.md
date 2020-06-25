@@ -12,11 +12,11 @@ BloomFilters with k-slices:
          pip3 install mmh3
          pip3 install bitstring
 ```  
-4. Run from command line (note that BloomFilter initialization may take some seconds):
+3. Run from command line (note that BloomFilter initialization may take some seconds):
 ```
          python3 test.py
 ```  
-5. Enter any string to detect if it is an English word or not.
+4. Enter any string to detect if it is an English word or not.
 
 Optionally, run ```python3 no_bf.py``` (it uses Sets) to compare the memory usage with BloomFilters (both of them displays their own PIDs, find them from memory usage monitoring app in your OS). 
 
