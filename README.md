@@ -24,5 +24,3 @@ Scalable Bloom Filters implementation is in [sbf.py](https://github.com/Abduaziz
 
 English words are from this [project](
 https://github.com/dwyl/english-words/blob/master/words_alpha.txt).
-
-License: [WTFPL](https://en.wikipedia.org/wiki/WTFPL).
