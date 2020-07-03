@@ -6,7 +6,10 @@ It is important not to use a dictionary or set because of memory constraints.
 
 #### Usage:
 BloomFilters with k-slices:  
-1. Clone this repo
+1. Clone this repo:  
+```
+         git clone https://github.com/AbduazizKayumov/BloomFilters.git
+```  
 2. Install murmur hash and bitstring:
 ```
          pip3 install mmh3

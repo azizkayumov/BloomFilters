@@ -66,7 +66,7 @@ class TestBloomFilters(unittest.TestCase):
         self.assertEqual(added, False, "New additions should have been impossible")
 
 
-    # Test if ScalableBloomFilters maximizes N for its first filter
+    # Test if ScalableBloomFilters maximizes N for its filters
     # such that its filters allocate space less than or equal to the desired M
     def test_sbf_scalability(self):
         M = 64
