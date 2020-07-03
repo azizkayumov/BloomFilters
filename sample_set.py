@@ -1,7 +1,7 @@
 import os
 
 
-file = open("words.txt",'r')
+file = open("data/words.txt",'r')
 words = file.read().splitlines()
 
 S = set(words)

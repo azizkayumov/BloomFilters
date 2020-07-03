@@ -1,8 +1,5 @@
 from math import ceil, floor, log2, log
-from bitstring import BitArray
-import mmh3 # murmur hash
-import os # getpid
-from bf import BloomFilter
+from filters.bf import BloomFilter
 
 
 class ScalableBloomFilters:
@@ -42,10 +39,14 @@ class ScalableBloomFilters:
     def create_filter(self):
         i = len(self.filters)
 
+        # get new error probability with the tightening ratio
         Pi = self.P * self.r
+        # subtract the new error probability from overall error probability
         self.P = self.P - Pi
 
+        # scale the slice size for new filter: Mi = M * s ^ i
         Mi = self.M * (self.s ** i)
+        # maximize N for new filter
         Ni = self.max_n(Mi, Pi)
 
         new_filter = BloomFilter(Ni, Pi)

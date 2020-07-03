@@ -14,13 +14,13 @@ BloomFilters with k-slices:
 ```  
 3. Run from command line (note that BloomFilter initialization may take some seconds):
 ```
-         python3 test.py
+         python3 sample_bf.py
 ```  
 4. Enter any string to detect if it is an English word or not.
 
-Optionally, run ```python3 no_bf.py``` (it uses Sets) to compare the memory usage with BloomFilters (both of them displays their own PIDs, find them from memory usage monitoring app in your OS). 
+Optionally, run ```python3 sample_set.py``` (it uses Sets) to compare the memory usage with BloomFilters (both of them displays their own PIDs, find them from memory usage monitoring app in your OS).
 
-Scalable Bloom Filters implementation is in [sbf.py](https://github.com/AbduazizKayumov/BloomFilters/blob/master/sbf.py), run ```python3 test_sbf.py``` to see how it scales for 370K English words.
+Scalable Bloom Filters implementation is in [filters/sbf.py](https://github.com/AbduazizKayumov/BloomFilters/blob/master/filters/sbf.py), run ```python3 sample_sbf.py``` to see how it scales for 370K English words.
 
 English words are from this [project](
 https://github.com/dwyl/english-words/blob/master/words_alpha.txt).
