@@ -2,10 +2,7 @@ from math import ceil, log2, log, floor
 from bitstring import BitArray
 import mmh3 # murmur hash
 
-"""asdasdas
 
-
-"""
 class BloomFilter:
     def __init__(self, N, P):
         p = 0.5                      # fill ratio
