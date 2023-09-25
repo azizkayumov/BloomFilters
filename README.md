@@ -8,36 +8,36 @@ It is important not to use a dictionary or set because of memory constraints.
 BloomFilters with k-slices:  
 1. Clone this repo:  
 ```
-        git clone https://github.com/AbduazizKayumov/BloomFilters.git
+git clone https://github.com/AbduazizKayumov/BloomFilters.git
 ```
 2. Create venv:
 ```
-        python3 -m venv env
-        source env/bin/activate
+python3 -m venv env
+source env/bin/activate
 ```
 2. Install murmur hash and bitstring:
 ```
-        pip3 install --upgrade pip
-        pip3 install mmh3
-        pip3 install bitstring
+pip3 install --upgrade pip
+pip3 install mmh3
+pip3 install bitstring
 ```  
 3. Run the example app (note that BloomFilter initialization may take some seconds):
 ```
-        python3 sample_bf.py
+python3 sample_bf.py
 ```  
 4. Enter any string to detect if it is an English word or not:
 ```
-        BloomFilter initialized with: 
-        m =  533948
-        k =  9
-        N =  370104
-        PID =  7254
-        Enter any word: vladivostok
-        vladivostok is not an English word.
+BloomFilter initialized with: 
+m =  533948
+k =  9
+N =  370104
+PID =  7254
+Enter any word: vladivostok
+vladivostok is not an English word.
 
-        Enter any word: flowers
-        flowers may be an English word.
-        ...
+Enter any word: flowers
+flowers may be an English word.
+...
 ```
 
 Optionally, run ```python3 sample_set.py``` (it uses Sets) to compare the memory usage with BloomFilters (both of them display their own PIDs, find them from memory usage monitoring app in your OS).
