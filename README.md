@@ -18,8 +18,7 @@ source env/bin/activate
 2. Install murmur hash and bitstring:
 ```
 pip3 install --upgrade pip
-pip3 install mmh3
-pip3 install bitstring
+pip3 install -r requierements.txt
 ```  
 3. Run the example app (note that BloomFilter initialization may take some seconds):
 ```
