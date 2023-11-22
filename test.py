@@ -9,14 +9,18 @@ class TestBloomFilters(unittest.TestCase):
 
     # Test for membership queries on BloomFilter
     def test_membership(self):
-        N = 100000
-        P = 0.001
-        bf = BloomFilter(N, P)
-        for i in range(N):
-            element = str(i)
-            bf.add(element)
+        m = 64
+        p = 0.001
+        bf = BloomFilter(m, p)
+        
+        num_elements = 0
+        while True:
+            element = str(num_elements)
+            if not bf.add(element):
+                break
+            num_elements += 1
 
-        for i in range(N):
+        for i in range(num_elements):
             test_element = str(i)
             may_contain = bf.contains(test_element)
             self.assertEqual(may_contain, True, "A membership query on " + str(test_element) + " must be True, the result was False")
@@ -24,19 +28,22 @@ class TestBloomFilters(unittest.TestCase):
 
     # Test if the false positive error probability is less than the desired value
     def test_false_positive(self):
-        N = 100000
-        P = 0.001
-        bf = BloomFilter(N, P)
+        m = 64
+        p = 0.001
+        bf = BloomFilter(m, p)
 
         # insert random numbers
+        num_elements = 0
         not_inserted = []
-        for i in range(N):
-            element = str(i)
-            insert = random.choice([True, False])
-            if insert:
-                bf.add(element)
+        while True:
+            element = str(num_elements)
+            should_add = random.choice([True, False])
+            if should_add:
+                if not bf.add(element):
+                    break
             else:
-                not_inserted.append(i)
+                not_inserted.append(element)
+            num_elements += 1
 
         # check for not inserted numbers
         # count the false positive queries
@@ -47,8 +54,8 @@ class TestBloomFilters(unittest.TestCase):
             if may_contain:
                 number_of_false_positives += 1
 
-        false_positive_error = number_of_false_positives / N
-        self.assertLessEqual(false_positive_error, P, "False positive error must be less than the desired value")
+        false_positive_error = number_of_false_positives / num_elements
+        self.assertLessEqual(false_positive_error, p, "False positive error must be less than the desired value")
 
 
     # Test that new additions are not possible if already filled up
@@ -84,24 +91,23 @@ class TestBloomFilters(unittest.TestCase):
             sbf.create_filter()
             filter = sbf.filters[-1]
             allocated_M = filter.m * filter.k
-
-        self.assertLessEqual(allocated_M, desired_M, "ScalableBloomFilters allocated more space than expected")
+            self.assertLessEqual(allocated_M, desired_M, "ScalableBloomFilters allocated more space than expected")
 
 
     # Test that ScalableBloomFilter's compounded error probability stays under the desired value
     def test_sbf_compounded_error_probability(self):
-        M = 64
-        P = 0.001
+        m = 64
+        p = 0.001
 
-        sbf = ScalableBloomFilters(M, P)
+        sbf = ScalableBloomFilters(m, p)
 
         number_of_filters = 20
-        compounded_error_prob = sbf.filters[-1].P
+        compounded_error_prob = sbf.filters[-1].p
         for i in range(number_of_filters):
             sbf.create_filter()
-            compounded_error_prob += sbf.filters[-1].P
+            compounded_error_prob += sbf.filters[-1].p
 
-        self.assertLessEqual(compounded_error_prob, P, "ScalableBloomFilters error probability exceeds the desired value")
+        self.assertLessEqual(compounded_error_prob, p, "ScalableBloomFilters error probability exceeds the desired value")
 
 
 if __name__ == "__main__":

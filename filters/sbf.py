@@ -3,12 +3,11 @@ from filters.bf import BloomFilter
 
 
 class ScalableBloomFilters:
-    def __init__(self, M, P, s = 2, r = 0.5):
-        self.M = M      # available bits for the first filter
-        self.P = P      # overall error probability
+    def __init__(self, m, p, s = 2, r = 0.5):
+        self.m = m      # available bits for the first filter (slice size)
+        self.p = p      # overall error probability
         self.s = s      # slice scale factor
         self.r = r      # tightening ratio
-        self.p = 0.5    # fill ratio
         self.filters = []
 
         # create first BloomFilter
@@ -40,19 +39,12 @@ class ScalableBloomFilters:
         i = len(self.filters)
 
         # get new error probability with the tightening ratio
-        Pi = self.P * self.r
+        pi = self.p * self.r
         # subtract the new error probability from overall error probability
-        self.P = self.P - Pi
+        self.p -= pi
 
         # scale the slice size for new filter: Mi = M * s ^ i
-        Mi = self.M * (self.s ** i)
-        # maximize N for new filter
-        Ni = self.max_n(Mi, Pi)
+        mi = self.m * (self.s ** i)
 
-        new_filter = BloomFilter(Ni, Pi)
+        new_filter = BloomFilter(mi, pi)
         self.filters.append(new_filter)
-
-
-    # maximizes N for given error probability P and filter size M
-    def max_n(self, M, P):
-        return floor(-1 * M * log(self.p) * log(1 - self.p) / log(P))
