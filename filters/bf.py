@@ -5,17 +5,16 @@ import mmh3 # murmur hash
 
 class BloomFilter:
     def __init__(self, m, p):
-        self.m = m                  # slice size
-        self.p = p                  # error probability
-        self.k = ceil(log2(1 / p))  # number of slices
-        self.n = self.max_n()       # number of elements
-        self.count = 0              # number of elements inserted
+        self.m = m                      # slice size
+        self.p = p                      # error probability
+        self.k = floor(log2(1 / p))      # number of slices
+        self.n = self.max_n()           # number of elements
+        self.count = 0                  # number of elements inserted
 
         # add k slices
         self.slices = []
         for _ in range(self.k):
             self.slices.append(BitArray(self.m))
-
 
     def add(self, value):
         # if this BloomFilter was already filled up
@@ -46,7 +45,7 @@ class BloomFilter:
     def max_n(self):
         M = self.m * self.k
         P = self.p
-        max_n = M * (log(2) ** 2) / abs(log(P))
+        max_n = (M * (log(2) ** 2)) / abs(log(P))
         return floor(max_n)
     
     def __to_str__(self):
