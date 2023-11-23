@@ -14,11 +14,11 @@ compounded_memory_usage = 0
 for i in range(len(sbf.filters)):
     bf = sbf.filters[i]
     print("----------- BloomFilter[" + str(i) + "]-----------")
-    print("N = ", bf.N)
+    print("N = ", bf.max_n())
     print("k = ", bf.k)
-    print("P = ", bf.P)
+    print("P = ", bf.p)
     print("m = ", bf.m)
-    compounded_error_prob += bf.P
+    compounded_error_prob += bf.p
     compounded_memory_usage += bf.m * bf.k
 
 print("Overall P = ", compounded_error_prob)
